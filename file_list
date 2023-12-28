@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>File List</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>Uploaded Files</h1>
+    <table>
+        <tr>
+            <th>File Key</th>
+            <th>File Name</th>
+            <th>Upload Date</th>
+            <th>Check Result</th>
+        </tr>
+        <!-- Assuming 'files' is an array of objects with 'title', 'file', 'upload_date', and 'id' properties -->
+        <!-- Replace this with your actual data -->
+        {% for file in files %}
+        <tr>
+            <td>{{ file.title }}</td>
+            <td>{{ file.file }}</td>
+            <td>{{ file.upload_date|date:"Y, M, d, H:i:s" }}</td>
+            <td><a href="file_detail.html?id={{ file.id }}">Link</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+    <!-- Add Delete All Files button -->
+    <form id="deleteForm" method="post" action="">
+        <!-- CSRF token should be included if this form is part of a Django application -->
+        <!-- {% csrf_token %} -->
+        <button type="submit">Delete All Files</button>
+    </form>
+
+    <!-- Add Back button -->
+    <button onclick="history.back()">Back</button>
+</body>
+</html>
