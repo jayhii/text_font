@@ -81,6 +81,19 @@
             left: 50%; /* 추가된 부분 */
             transform: translate(-50%, -50%); /* 추가된 부분 */
         }
+        #fileList {
+            display: none;
+            margin-top: 20px;
+        }
+
+        #uploadedFiles {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        #uploadedFiles li {
+            margin-bottom: 5px;
+        }
     </style>
 </head>
 
@@ -115,6 +128,12 @@
             <h2>B 버튼 클릭</h2>
             <p>B 버튼 클릭 시 display:block</p>
         </div>
+
+        <div id="fileList">
+            <h2>업로드된 파일 목록:</h2>
+            <ul id="uploadedFiles"></ul>
+        </div>
+
     </div>
 
     <script>
@@ -127,8 +146,29 @@
             var content = document.getElementById('content' + contentId);
             content.style.display = 'block';
 
-            // 박스1 뒤로 이동
-            document.getElementById('box1').style.zIndex = '1';
+        }
+
+        function redirectToFileList() {
+            // 파일 입력 요소 가져오기
+            var inputElement = document.getElementById('id_your_image');
+
+            // 파일이 선택되었는지 확인
+            if (inputElement.files.length > 0) {
+                // 업로드된 파일 가져오기
+                var file = inputElement.files[0];
+
+                // 파일 목록 컨테이너 표시
+                document.getElementById('fileList').style.display = 'block';
+
+                // 업로드된 파일을 위한 리스트 항목 생성
+                var listItem = document.createElement('li');
+                listItem.textContent = file.name;
+
+                // 리스트 항목을 업로드된 파일 목록에 추가
+                document.getElementById('uploadedFiles').appendChild(listItem);
+            } else {
+                alert('파일을 선택하세요.');
+            }
         }
     </script>
 
