@@ -2,24 +2,90 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tek Model Test</title>
+    <title>Tek_font_detector</title>
+    <style>
+        /* 드롭다운 스타일 */
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f1f1f1;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #ddd;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+    </style>
 </head>
 <body>
-    <h1>Hello, Earthlings!</h1>
-    <p>You Can be Test our Tools</p>
+    <h1>What Font?</h1>
+    <img src="/images/test.jpg" alt="Sample Image" width="300">
 
-    <!-- 버튼을 클릭하면 다른 HTML 페이지로 이동하는 JavaScript 코드 -->
-    <button onclick="goToOtherPage()">Font Detector</button>
+    <div class="dropdown">
+        <button class="dropbtn">Select Action</button>
+        <div class="dropdown-content">
+            <a href="#" onclick="redirectToFileList()">Upload and Redirect</a>
+            <a href="#" onclick="uploadAndAlert()">Upload and Show Alert</a>
+        </div>
+    </div>
+
+    <form id="uploadForm" method="post" enctype="multipart/form-data">
+        <!-- CSRF 토큰은 GitHub Pages에서는 필요하지 않을 수 있습니다. -->
+        <!-- {% csrf_token %} -->
+
+        <label for="id_your_image">Select a File:</label>
+        <input type="file" name="your_image" id="id_your_image" required>
+        <br>
+
+        <button type="button" onclick="performSelectedAction()">Perform Action</button>
+    </form>
 
     <script>
-        function goToOtherPage() {
-            // 다른 HTML 페이지의 경로를 지정합니다.
-            var otherPagePath = "/_layers/file_upload.html";
+        function redirectToFileList() {
+            window.location.href = "file_list.html";
+        }
 
-            // 페이지 이동
-            window.location.href = otherPagePath;
+        function uploadAndAlert() {
+            // 여기에 업로드 로직을 추가할 수 있습니다.
+            // 예시: 파일 업로드 로직이 필요하다면 추가해주세요.
+
+            // 파일 업로드 후 알림창 표시
+            alert("File uploaded successfully!");
+        }
+
+        function performSelectedAction() {
+            // 여기에서 선택한 드롭다운 항목에 따라 동작을 수행합니다.
+            var dropdown = document.querySelector('.dropdown');
+            var selectedAction = dropdown.querySelector('.dropbtn').innerText.trim();
+
+            // 예시: 선택한 동작이 "Upload and Redirect"일 경우
+            if (selectedAction === "Upload and Redirect") {
+                redirectToFileList();
+            }
+            // 예시: 선택한 동작이 "Upload and Show Alert"일 경우
+            else if (selectedAction === "Upload and Show Alert") {
+                uploadAndAlert();
+            }
+            // 다른 동작에 대한 처리 추가 가능
         }
     </script>
 </body>
