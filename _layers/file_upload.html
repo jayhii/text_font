@@ -12,7 +12,15 @@
         <label for="id_your_image">Select an File:</label>
         <input type="file" name="your_image" id="id_your_image" required>
         <br>
-        <button type="submit">Upload</button>
+        <button type="button" onclick="redirectToFileList()">Upload</button>
     </form>
-</body>
+
+    <script>
+        function redirectToFileList() {
+            // Add logic for form validation if needed
+
+            // Assuming file_list.html is in the root directory
+            window.location.href = "file_list.html";
+        }
+    </script>
 </html>
