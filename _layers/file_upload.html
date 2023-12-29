@@ -1,26 +1,129 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-    <title>Tek_font_detector</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tekai</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        #container {
+            display: flex;
+            flex: 1;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            text-align: center;
+            background-color: #fff;
+            padding: 10px;
+            border: 1px solid #333;
+            position: relative; /* 추가된 부분 */
+        }
+
+        #buttons-container {
+            position: fixed;
+            top: 150px;
+            left: 15%;
+            transform: translateX(-50%);
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        #buttonA,
+        #buttonB {
+            margin: 10px;
+            padding: 10px;
+            width: 150px;
+            cursor: pointer;
+        }
+
+        #box1 {
+            position: fixed;
+            top: 250px;
+            left: 5%;
+            width: 90%;
+            height: 70%;
+            /background-color: #fff;
+            padding: 10px;
+            border: 2px solid #333;
+        }
+
+        #contentA,
+        #contentB {
+            display: none;
+            text-align: center;
+            position: absolute; /* 추가된 부분 */
+            top: 50%; /* 추가된 부분 */
+            left: 50%; /* 추가된 부분 */
+            transform: translate(-50%, -50%); /* 추가된 부분 */
+        }
+    </style>
 </head>
+
 <body>
-    <h1>What Font ?</h1>
-    <img src="/images/test.jpg" alt="Sample Image" width="300">
-    <form method="post" enctype="multipart/form-data">
-        <!-- CSRF 토큰은 GitHub Pages에서는 필요하지 않을 수 있습니다. -->
-        <!-- {% csrf_token %} -->
-        <label for="id_your_image">Select an File:</label>
-        <input type="file" name="your_image" id="id_your_image" required>
-        <br>
-        <button type="button" onclick="redirectToFileList()">Upload</button>
-    </form>
+
+    <header>
+        <h1>Show your Self!</h1>
+    </header>
+
+    <div id="container">
+        <div id="buttons-container">
+            <button id="buttonA" onclick="showContent('A')">Font Detector</button>
+            <button id="buttonB" onclick="showContent('B')">Font Bot</button>
+        </div>
+
+        <div id="box1"></div> <!-- 추가된 빈 박스 -->
+
+        <div id="contentA">
+	<h1>What Font ?</h1>
+	<img src="/images/test.jpg" alt="Sample Image" width="300">
+	<form method="post" enctype="multipart/form-data">
+	    <!-- CSRF 토큰은 GitHub Pages에서는 필요하지 않을 수 있습니다. -->
+	    <!-- {% csrf_token %} -->
+	    <label for="id_your_image">Select an File:</label>
+	    <input type="file" name="your_image" id="id_your_image" required>
+	    <br>
+	    <button type="button" onclick="redirectToFileList()">Upload</button>
+	</form>
+        </div>
+
+        <div id="contentB">
+            <h2>B 버튼 클릭</h2>
+            <p>B 버튼 클릭 시 display:block</p>
+        </div>
+    </div>
 
     <script>
-        function redirectToFileList() {
-            // Add logic for form validation if needed
+        function showContent(contentId) {
+            // 모든 content 숨김
+            document.getElementById('contentA').style.display = 'none';
+            document.getElementById('contentB').style.display = 'none';
 
-            // Assuming file_list.html is in the root directory
-            window.location.href = "file_list.html";
+            // 클릭된 버튼에 해당하는 content 보이기
+            var content = document.getElementById('content' + contentId);
+            content.style.display = 'block';
+
+            // 박스1 뒤로 이동
+            document.getElementById('box1').style.zIndex = '1';
         }
     </script>
+
+</body>
+
 </html>
