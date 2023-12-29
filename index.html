@@ -91,8 +91,16 @@
         <div id="box1"></div> <!-- 추가된 빈 박스 -->
 
         <div id="contentA">
-            <h2>A 버튼 클릭</h2>
-            <p>A 버튼 클릭 시 display:block</p>
+	<h1>What Font ?</h1>
+	<img src="/images/test.jpg" alt="Sample Image" width="300">
+	<form method="post" enctype="multipart/form-data">
+	    <!-- CSRF 토큰은 GitHub Pages에서는 필요하지 않을 수 있습니다. -->
+	    <!-- {% csrf_token %} -->
+	    <label for="id_your_image">Select an File:</label>
+	    <input type="file" name="your_image" id="id_your_image" required>
+	    <br>
+	    <button type="button" onclick="redirectToFileList()">Upload</button>
+	</form>
         </div>
 
         <div id="contentB">
