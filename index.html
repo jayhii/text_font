@@ -1,104 +1,92 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tek_font_detector</title>
+    <title>Tekai</title>
     <style>
-        /* 드롭다운 스타일 */
-        .dropdown {
-            position: relative;
-            display: inline-block;
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
         }
 
-        .dropdown-content {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease-out;
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        #text-box {
             position: absolute;
-            background-color: #f1f1f1;
-            width: 160px;
-            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-            z-index: 1;
+            bottom: 0;
+            left: 0;
+            background-color: #eee;
+            padding: 10px;
+            cursor: pointer;
         }
 
-        .dropdown-content a {
-            color: black;
-            padding: 12px 16px;
-            text-decoration: none;
-            display: block;
+        #main-box {
+            display: none;
+            flex: 1;
+            align-items: center;
+            justify-content: center;
         }
 
-        .dropdown-content a:hover {
-            background-color: #ddd;
+        #main-box header {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
         }
 
-        .dropdown:hover .dropdown-content {
-            max-height: 200px; /* 적당한 크기로 조절하세요. */
+        input[type="file"] {
+            display: none;
+        }
+
+        label {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            cursor: pointer;
         }
     </style>
 </head>
-<body>
-    <h1>What Font?</h1>
-    <img src="/images/test.jpg" alt="Sample Image" width="300">
 
-    <div class="dropdown">
-        <button class="dropbtn">Select Action</button>
-        <div class="dropdown-content">
-            <a href="#" onclick="redirectToFileList()">Upload and Redirect</a>
-            <a href="#" onclick="uploadAndAlert()">Upload and Show Alert</a>
-            <a href="#" onclick="detectFont()">Detect Font</a>
-        </div>
+<body>
+
+    <header>
+        <h1>Show your Self!</h1>
+    </header>
+
+    <div id="text-box" onclick="showMainBox()">
+        Font Detector
     </div>
 
-    <form id="uploadForm" method="post" enctype="multipart/form-data">
-        <!-- CSRF 토큰은 GitHub Pages에서는 필요하지 않을 수 있습니다. -->
-        <!-- {% csrf_token %} -->
-
-        <label for="id_your_image">Select a File:</label>
-        <input type="file" name="your_image" id="id_your_image" required>
-        <br>
-
-        <button type="button" onclick="performSelectedAction()">Perform Action</button>
-    </form>
+    <div id="main-box">
+        <header>
+            <h2>What the Font?</h2>
+        </header>
+        <input type="file" id="file-input" onchange="uploadFile()">
+        <label for="file-input">Upload Font File</label>
+    </div>
 
     <script>
-        function redirectToFileList() {
-            window.location.href = "/_layers/file_list.html";
+        function showMainBox() {
+            var mainBox = document.getElementById('main-box');
+            mainBox.style.display = 'flex';
         }
 
-        function uploadAndAlert() {
-            // 여기에 업로드 로직을 추가할 수 있습니다.
-            // 예시: 파일 업로드 로직이 필요하다면 추가해주세요.
-
-            // 파일 업로드 후 알림창 표시
-            alert("File uploaded successfully!");
-        }
-
-        function detectFont() {
-            // 여기에 폰트 디텍션 로직을 추가하세요.
-            alert("Font detected!");
-        }
-
-        function performSelectedAction() {
-            // 여기에서 선택한 드롭다운 항목에 따라 동작을 수행합니다.
-            var dropdown = document.querySelector('.dropdown');
-            var selectedAction = dropdown.querySelector('.dropbtn').innerText.trim();
-
-            // 예시: 선택한 동작이 "Upload and Redirect"일 경우
-            if (selectedAction === "Upload and Redirect") {
-                redirectToFileList();
-            }
-            // 예시: 선택한 동작이 "Upload and Show Alert"일 경우
-            else if (selectedAction === "Upload and Show Alert") {
-                uploadAndAlert();
-            }
-            // 예시: 선택한 동작이 "Detect Font"일 경우
-            else if (selectedAction === "Detect Font") {
-                detectFont();
-            }
-            // 다른 동작에 대한 처리 추가 가능
+        function uploadFile() {
+            var fileInput = document.getElementById('file-input');
+            var fileName = fileInput.value.split('\\').pop();
+            alert('Uploaded file: ' + fileName);
         }
     </script>
+
 </body>
+
 </html>
